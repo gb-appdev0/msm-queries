@@ -1,0 +1,50 @@
+<h1>Actor #<%= @dir.id %> details</h1>
+
+<p><a href="/actors" class="btn tbn-block btn-outline-secondary">Go back</a> | <a href="/delete_actor/<%= @dir.id %>" class="btn tbn-block btn-outline-secondary">Delete actor</a></p>
+<hr>
+<dl>
+  <dt>Name</dt>
+  <dd><%= @dir.name %></dd>
+
+  <dt>Dob</dt>
+  <dd><%= @dir.dob %></dd>
+
+  <dt>Bio</dt>
+  <dd><%= @dir.bio %></dd>
+
+  <dt>Image</dt>
+  <dd><img src="<%= @dir.image %>" style="width:250px;"></dd>
+
+  <dt>Created at</dt>
+  <dd><%= time_ago_in_words(@dir.created_at) %> ago</dd>
+
+  <dt>Updated at</dt>
+  <dd><%= time_ago_in_words(@dir.updated_at) %> ago</dd>
+
+</dl>
+
+<hr>
+
+<h1>Filmography</h1>
+
+<table border="1">
+  <tr>
+    <td>Title</td>
+    <td>Year</td>
+    <td>Director</td>
+    <td>Character name</td>
+    <td></td> 
+  <tr>
+
+  <% @character_list.each do |ele| %>
+    <tr>
+      <% movie_ele = Movie.all.where({ :id => ele.movie_id})[0] %>
+      <td><%= movie_ele.title %></td>
+      <td><%= movie_ele.year %></td>
+      <td><%= Director.all.where({ :id => movie_ele.director_id})[0].name %></td>
+      <td><%= ele.name %></td>
+      <td><a href="/movies/<%= movie_ele.id %>">Show details</a></td> 
+    </tr>
+
+  <% end %>
+</table>

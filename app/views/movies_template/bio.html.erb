@@ -1,0 +1,32 @@
+<h1>Movie #<%= @dir.id %> details</h1>
+
+<p><a href="/movies" class="btn tbn-block btn-outline-secondary">Go back</a> | <a href="/delete_movie/<%= @dir.id %>" class="btn tbn-block btn-outline-secondary">Delete movie</a></p>
+<hr>
+<dl>
+  <dt>Title</dt>
+  <dd><%= @dir.title %></dd>
+
+  <dt>Year</dt>
+  <dd><%= @dir.year %></dd>
+
+  <dt>Duration</dt>
+  <dd><%= @dir.duration %></dd>
+
+  <dt>Description</dt>
+  <dd><%= @dir.description %></dd>
+
+  <dt>Image</dt>
+  <dd><img src="<%= @dir.image %>" style="width:250px;"></dd>
+
+  <dt>Director</dt>
+  <dd><%= Director.all.where({ :id => @dir.director_id})[0].name %></dd>
+
+  <dt>Created at</dt>
+  <dd><%= time_ago_in_words(@dir.created_at) %> ago</dd>
+
+  <dt>Updated at</dt>
+  <dd><%= time_ago_in_words(@dir.updated_at) %> ago</dd>
+
+</dl>
+
+<hr>
